@@ -14,7 +14,7 @@ namespace Curso.Api.Models.Users
         [Required(ErrorMessage = "O E-mail é obrigatório")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "O Login é obrigatório")]
+        [Required(ErrorMessage = "A Senha é obrigatória")]
         public string Password  { get; set; }
     }
 }
