@@ -23,5 +23,11 @@
             <param name="loginViewModelInput">View model do login</param>
             <returns></returns>
         </member>
+        <member name="M:curso.Api.Controllers.UserController.Register(curso.Api.Models.Users.LoginViewModelInput)">
+            <summary>
+            Este serviço permite cadastrar um usuário cadastrado não existente
+            </summary>
+            <param name="loginViewModelInput">View model do registro de login</param>
+        </member>
     </members>
 </doc>

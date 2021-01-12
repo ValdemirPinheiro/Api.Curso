@@ -19,5 +19,6 @@ namespace curso.Api.Infraestruture.Data
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<Curso> Curso { get; set; }
     }
 }
