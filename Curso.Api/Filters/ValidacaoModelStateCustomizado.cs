@@ -1,9 +1,9 @@
-﻿using Curso.Api.Models;
+﻿using curso.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
 
-namespace Curso.Api.Filters
+namespace curso.Api.Filters
 {
     public class ValidacaoModelStateCustomizado : ActionFilterAttribute
     {

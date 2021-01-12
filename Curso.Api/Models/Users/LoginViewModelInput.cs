@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Curso.Api.Models.Users
+namespace curso.Api.Models.Users
 {
     public class LoginViewModelInput
     {
@@ -14,6 +14,10 @@ namespace Curso.Api.Models.Users
 
         [Required(ErrorMessage = "A Senha é obrigatória")]
         public string Password { get; set; }
-       
+
+        [Required(ErrorMessage = "O Email é obrigatório")]
+        public string Email { get; set; }
+
+
     }
 }

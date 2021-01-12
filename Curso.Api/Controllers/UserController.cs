@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using curso.Api.Business.Entities;
+using curso.Api.Filters;
+using curso.Api.Infraestruture.Data;
+using curso.Api.Models;
+using curso.Api.Models.Users;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Curso.Api.Models.Users;
-using Swashbuckle.AspNetCore.Annotations;
-using Curso.Api.Models;
-using Curso.Api.Models.Users;
-using Curso.Api.Filters;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.Reactive.Subjects;
+using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace Curso.Api.Controllers
+namespace curso.Api.Controllers
 {
     [Route("api/v1/user")]
     [ApiController]
@@ -42,7 +41,7 @@ namespace Curso.Api.Controllers
             //     return BadRequest(new ValidaCampoViewModelOutput(ModelState.SelectMany(sm => sm.Value.Errors).Select(s => s.ErrorMessage)));        
             // }
 
-            var userViewModelOutput = new UserViewModelOutput() 
+            var userViewModelOutput = new UserViewModelOutput()
             {
                 Codigo = 1,
                 Login = "valdemirpinheiro",
@@ -65,7 +64,7 @@ namespace Curso.Api.Controllers
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var tokenGenerated = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
             var token = jwtSecurityTokenHandler.WriteToken(tokenGenerated);
-           
+
             return Ok(new
             {
                 Token = token,
@@ -73,14 +72,39 @@ namespace Curso.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// Este serviço permite cadastrar um usuário cadastrado não existente
+        /// </summary>
+        /// <param name="loginViewModelInput">View model do registro de login</param>
+        [SwaggerResponse(statusCode: 200, description: "Sucesso ao autenticar", Type = typeof(LoginViewModelInput))]
+        [SwaggerResponse(statusCode: 400, description: "Campos obrigatórios", Type = typeof(ValidaCampoViewModelOutput))]
+        [SwaggerResponse(statusCode: 500, description: "Erro interno", Type = typeof(ErroGenericoViewModel))]
         [HttpPost]
         [Route("register")]
         [ValidacaoModelStateCustomizado]
         public IActionResult Register(LoginViewModelInput loginViewModelInput)
         {
+            var optionsBuilder = new DbContextOptionsBuilder<CursoDbContext>();
+            optionsBuilder.UseSqlServer("Server=localhost;Database=Curso;user=sa;password=1234567");
+            CursoDbContext contexto = new CursoDbContext(optionsBuilder.Options);
+
+            var migracoesPendentes = contexto.Database.GetPendingMigrations();
+            if (migracoesPendentes.Count() > 0)
+            {
+                contexto.Database.Migrate();
+            }
+
+
+            var user = new User();
+            user.Login = loginViewModelInput.Login;
+            user.Password = loginViewModelInput.Password;
+            user.Email = loginViewModelInput.Email;
+            contexto.User.Add(user);
+            contexto.SaveChanges();
+
             return Created("", loginViewModelInput);
         }
     }
 
-   
+
 }

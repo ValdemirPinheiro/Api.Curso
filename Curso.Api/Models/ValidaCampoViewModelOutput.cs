@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Curso.Api.Models
+namespace curso.Api.Models
 {
     public class ValidaCampoViewModelOutput
     {

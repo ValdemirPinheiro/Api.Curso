@@ -11,7 +11,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace Curso.Api
+namespace curso.Api
 {
     public class Startup
     {
@@ -25,6 +25,7 @@ namespace Curso.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllers()
                 .ConfigureApiBehaviorOptions(options =>
                 {

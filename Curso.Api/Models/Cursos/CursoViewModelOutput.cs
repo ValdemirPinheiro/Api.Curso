@@ -1,4 +1,4 @@
-﻿namespace Curso.Api.Models.Cursos
+﻿namespace curso.Api.Models.Cursos
 {
     public class CursoViewModelOutput
     {
