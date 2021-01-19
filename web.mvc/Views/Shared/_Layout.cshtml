@@ -21,9 +21,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Usuários
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Cadastrar">Cadastrar</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Logar">Logar</a>
+                            </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cursos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"  asp-area="" asp-controller="Curso" asp-action="Cadastrar">Cadastrar</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Curso" asp-action="Listar">Listar</a>
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
             </div>
