@@ -9,5 +9,6 @@ namespace curso.Api.Business.Repositories
         void Commit();
 
         IList<Curso> ObterPorUser(int codigoUser);
+
     }
 }

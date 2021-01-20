@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace curso.Api.Models.Users
+﻿namespace curso.Api.Models.Users
 {
     public class UserViewModelOutput
     {
